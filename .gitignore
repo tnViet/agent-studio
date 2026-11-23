@@ -1,0 +1,6 @@
+.env
+clips/*
+!clips/.gitkeep
+node_modules/
+__pycache__/
+*.log
