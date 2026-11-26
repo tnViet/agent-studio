@@ -14,6 +14,26 @@
 
 Luồng một video: Producer lập brief và chuỗi 8 task, các agent làm lần lượt (kịch bản, cổng 1, storyboard, hình, dựng, kiểm tra, cổng 2, đóng gói). Mỗi video nằm trong `clips/<mã task>/`.
 
+## Hình ảnh demo
+
+Văn phòng 3D: mỗi agent là một nhân vật, trạng thái làm việc hiển thị trực tiếp.
+
+![Văn phòng 3D](docs/images/van-phong-3d.png)
+
+Quản lý token theo agent và theo video (tách theo hãng, đơn vị là số token).
+
+![Token theo agent](docs/images/token-theo-agent.png)
+![Token theo video](docs/images/token-theo-video.png)
+
+Duyệt kịch bản (cổng 1) trên Studio web.
+
+![Duyệt kịch bản trên web](docs/images/duyet-kich-ban-web.png)
+
+Duyệt kịch bản và video qua Discord.
+
+![Duyệt kịch bản qua Discord](docs/images/duyet-kich-ban-discord.png)
+![Duyệt video qua Discord](docs/images/duyet-video-discord.png)
+
 ## Yêu cầu
 
 - Windows, Node.js 24, Python 3.12 (Pillow), FFmpeg (có `ffprobe`)
