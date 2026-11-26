@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Xem nhân vật</title>
+<style>body{margin:0;background:#c9e6f6;font-family:sans-serif}p{position:fixed;top:8px;left:12px;margin:0}</style>
+</head>
+<body>
+<p>Trang xem nhân vật. Sửa file characters.js rồi tải lại trang. Thêm ?pose=sit để xem tư thế ngồi, ?pose=side để xem nghiêng.</p>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { characterFor, buildWukong } from "./characters.js";
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xc9e6f6);
+const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 1.6, 15);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0.9, 0);
+scene.add(new THREE.HemisphereLight(0xe6f4ff, 0xf6dccb, 1.6));
+const sun = new THREE.DirectionalLight(0xfff3e0, 1.6);
+sun.position.set(4, 8, 10);
+scene.add(sun);
+
+const names = ["producer", "scriptwriter", "director", "asset", "editor", "reviewer", "publisher"];
+const pose = new URLSearchParams(location.search).get("pose");
+for (let i = 0; i < 8; i++) {
+  let model;
+  if (i < 7) {
+    model = characterFor(names[i]).build();
+  } else {
+    model = buildWukong();
+  }
+  model.position.x = (i - 3.5) * 1.75;
+  scene.add(model);
+  const rig = model.userData.rig;
+  if (pose === "sit") {
+    rig.body.position.y = -0.2;
+    rig.legL.rotation.x = -1.45;
+    rig.legR.rotation.x = -1.45;
+    rig.legL.rotation.z = 0.4;
+    rig.legR.rotation.z = -0.4;
+    rig.armL.rotation.set(-1, 0, 0.69);
+    rig.armR.rotation.set(-1, 0, -0.69);
+    rig.seat.visible = true;
+  }
+  if (pose === "side") {
+    model.rotation.y = 0.8;
+  }
+}
+renderer.setAnimationLoop(function () {
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

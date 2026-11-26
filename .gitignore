@@ -1,7 +1,35 @@
+﻿# Bi mat
 .env
+.env.*
+!.env.example
+
+# Dau ra video (nang)
 clips/*
 !clips/.gitkeep
+
+# Node, Python
 node_modules/
 __pycache__/
+*.pyc
+.venv/
+venv/
+
+# Trang thai chay, log
 *.log
+studio/server/notify-state.json
+
+# Ban sao luu, file tam
+docs/backup-*/
+_to_delete*/
+_to_delete*.zip
+*.tmp
+
+# Cong cu, he dieu hanh
 .claude/
+.vscode/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+REPORT/
+tools/assets/
